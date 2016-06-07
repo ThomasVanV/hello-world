@@ -1,0 +1,10 @@
+Default
+we basically have three steps for distributing maya tools. None of which affect the default installation of maya or any of it's environment variables.
+
+First we have a simple python program that collects information about the environment - where perforce, where maya is, etc. This program also creates a new desktop shortcut for maya with a unique name so it isn't confused with the regular desktop shortcut. This program isn't run very often, basically each time a new version of the tools are pushed to the team.
+
+Second we have a special MEL script simply called mayaStartupConfig.MEL. This MEL file just calls python scripts which are deferred until maya is idle.
+
+Third we have a second python program that is called. This is what the new Maya shortcut runs instead of the maya.exe. This python program sets the Maya Env Vars and then calls maya.exe with -c flag pointed to mayaStartupConfig.MEL file. This basically allows you to give maya another script to run when it loads in addition to the userSetup files. 
+
+So now i have two desktop shortcuts for Maya, one that is custom and one that is native. Individuals users can modify maya.env, userSetup.mel, userSetup.py however they like, and they will work under both conditions.
